@@ -100,6 +100,7 @@ public abstract class GvrBasePointerRaycaster : BaseRaycaster
     {
         lastRay = GvrBasePointer.CalculateRay(pointer, pointer.raycastMode);
         float radius = pointer.CurrentPointerRadius;
+
         PerformRaycast(lastRay, radius, eventData, resultAppendList);
     }
 }
