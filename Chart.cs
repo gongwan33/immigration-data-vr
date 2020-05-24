@@ -10,12 +10,14 @@ public class Chart : MonoBehaviour
     float _scaleStep = 0.001f;
     float _maxScale = 0.15f;
     int _rotateSpeed = 15;
+    Vector3 _originScale;
     BarGraphDat _barGraphDat;
     
     // Start is called before the first frame update
     void Start()
     {
         _barGraphDat = GetComponentInChildren<BarGraphDat>();
+        _originScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -91,6 +93,7 @@ public class Chart : MonoBehaviour
 
     public void setChartYear(int year)
     {
+        transform.localScale = _originScale;
         _barGraphDat.updateBarYear(year);
     }
 }
