@@ -5,6 +5,11 @@ using UnityEngine;
 public class Chart : MonoBehaviour
 {
     bool _isRotate = false;
+    bool _isScaleUp = false;
+    bool _isScaleDown = false;
+    float _scaleStep = 0.001f;
+    float _maxScale = 0.15f;
+    int _rotateSpeed = 15;
     
     // Start is called before the first frame update
     void Start()
@@ -17,9 +22,39 @@ public class Chart : MonoBehaviour
     {
         if(_isRotate)
         {
-            var rot = transform.rotation;
-            rot.y += Time.deltaTime * 1;
-            transform.rotation = rot;
+            var rot = transform.eulerAngles;
+            rot.y += Time.deltaTime * _rotateSpeed;
+            transform.rotation = Quaternion.Euler(rot);
+        }
+
+        if(_isScaleUp)
+        {
+            var scale = transform.localScale;
+            if (scale.x > _maxScale || scale.y > _maxScale || scale.z > _maxScale)
+            {
+                return;
+            }
+
+            scale.x += _scaleStep;
+            scale.z += _scaleStep;
+            scale.y += _scaleStep;
+            transform.localScale = scale;
+        }
+
+        if(_isScaleDown)
+        {
+            var scale = transform.localScale;
+
+            if (scale.x <= _scaleStep || scale.y <= _scaleStep || scale.z <= _scaleStep)
+            {
+                return;
+            }
+
+            scale.x -= _scaleStep;
+            scale.z -= _scaleStep;
+            scale.y -= _scaleStep;
+
+            transform.localScale = scale;
         }
     }
 
@@ -31,5 +66,25 @@ public class Chart : MonoBehaviour
     public void stopRotate()
     {
         _isRotate = false;
+    }
+
+    public void startScaleUp()
+    {
+        _isScaleUp = true;
+    }
+
+    public void stopScaleUp()
+    {
+        _isScaleUp = false;
+    }
+
+    public void startScaleDown()
+    {
+        _isScaleDown = true;
+    }
+
+    public void stopScaleDown()
+    {
+        _isScaleDown = false;
     }
 }

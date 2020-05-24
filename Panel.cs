@@ -36,28 +36,32 @@ public class Panel : MonoBehaviour
     void buttonUp(GameObject obj)
     {
         Vector3 scale = obj.transform.localScale;
-        scale.y = 0.5f;
+        scale.y = 0.01f;
         obj.transform.localScale = scale;
     }
 
     public void plusPress()
     {
         buttonDown(_gobjBtnPlus);
+        _chart.startScaleUp();
     }
 
     public void plusRelease()
     {
         buttonUp(_gobjBtnPlus);
+        _chart.stopScaleUp();
     }
 
     public void minusPress()
     {
         buttonDown(_gobjBtnMinus);
+        _chart.startScaleDown();
     }
 
     public void minusRelase()
     {
         buttonUp(_gobjBtnMinus);
+        _chart.stopScaleDown();
     }
 
     public void rotatePress()
