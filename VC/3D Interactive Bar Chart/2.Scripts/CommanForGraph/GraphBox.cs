@@ -29,9 +29,9 @@ namespace Graph.VittorCloud
         #region privateVariables
 
         
-        protected List<GraphPoint> ListOfXPoint;
-        protected List<GraphPoint> ListOfYPoints;
-        protected List<GraphPoint> ListOfZPoints;
+        public List<GraphPoint> ListOfXPoint;
+        public List<GraphPoint> ListOfYPoints;
+        public List<GraphPoint> ListOfZPoints;
         public List<BarGorup> ListOfGroups;
         protected float XpointCount;
         protected float YpointCount;
@@ -51,12 +51,11 @@ namespace Graph.VittorCloud
         #region UnityCallBacks
         // Start is called before the first frame update
         public void Awake()
-        {
+        { 
             ListOfXPoint = new List<GraphPoint>();
             ListOfYPoints = new List<GraphPoint>();
             ListOfZPoints = new List<GraphPoint>();
             ListOfGroups = new List<BarGorup>();
-
         }
 
         // Update is called once per frame
@@ -109,6 +108,16 @@ namespace Graph.VittorCloud
         public void InitXAxis(int xMaxSize, float xStart, float xSegment, float xRowOffset)
         {
 
+            foreach (var p in ListOfXPoint)
+            {
+                if (p != null)
+                {
+                    DestroyImmediate(p.gameObj);
+                    DestroyImmediate(p);
+                }
+            }
+
+            ListOfXPoint.Clear();
 
             XAxis.transform.localScale = new Vector3(XLength + xSegment, XAxis.transform.localScale.y, XAxis.transform.localScale.z);
 
@@ -145,7 +154,12 @@ namespace Graph.VittorCloud
 
 
 
-
+                if(XPoint == null)
+                {
+                    GameObject p = Resources.Load(@"XPoint") as GameObject;
+                    XPoint = p.GetComponent<GraphPoint>();
+                    XPoint.gameObj = p;
+                }
                 GraphPoint temp = Instantiate(XPoint, transform.position, transform.rotation);
 
 
@@ -163,7 +177,16 @@ namespace Graph.VittorCloud
         }
         public void InitYAxis(int yMaxSize, float yStart, float ySegment)
         {
+            foreach (var p in ListOfYPoints)
+            {
+                if (p != null)
+                {
+                    DestroyImmediate(p.gameObj);
+                    DestroyImmediate(p);
+                }
+            }
 
+            ListOfYPoints.Clear();
 
             YAxis.transform.localScale = new Vector3(YAxis.transform.localScale.x, YLength + ySegment, YAxis.transform.localScale.z);
             YpointCount = ((YLength - yStart) / ySegment) + 1;
@@ -183,6 +206,14 @@ namespace Graph.VittorCloud
 
                     pos = ListOfYPoints[i - 1].transform.localPosition + new Vector3(0, distance, 0);
                 }
+
+                if (YPoint == null)
+                {
+                    GameObject p = Resources.Load(@"YPoint") as GameObject;
+                    YPoint = p.GetComponent<GraphPoint>();
+                    YPoint.gameObj = p;
+                }
+
                 GraphPoint temp = Instantiate(YPoint, transform.localPosition, transform.rotation);
                 temp.transform.parent = transform;
                 temp.transform.localPosition = pos;
@@ -197,6 +228,16 @@ namespace Graph.VittorCloud
         }
         public void InitZAxis(int zMaxSize, float zStart, float zSegment, float zRowOffset, float xStart, float xSegment)
         {
+            foreach (var p in ListOfZPoints)
+            {
+                if (p != null)
+                {
+                    DestroyImmediate(p.gameObj);
+                    DestroyImmediate(p);
+                }
+            }
+
+            ListOfZPoints.Clear();
 
 
             ZAxis.transform.localScale = new Vector3(ZAxis.transform.localScale.x, ZAxis.transform.localScale.y, ZLength + zSegment);
@@ -232,6 +273,14 @@ namespace Graph.VittorCloud
 
                     pos = ListOfZPoints[i - 1].transform.localPosition + new Vector3(0, 0, -distance);
                 }
+
+                if (ZPoint == null)
+                {
+                    GameObject p = Resources.Load(@"ZPoint") as GameObject;
+                    ZPoint = p.GetComponent<GraphPoint>();
+                    ZPoint.gameObj = p;
+                }
+
                 GraphPoint temp = Instantiate(ZPoint, transform.position, transform.rotation);
                 temp.transform.parent = transform;
                 temp.transform.localPosition = pos;

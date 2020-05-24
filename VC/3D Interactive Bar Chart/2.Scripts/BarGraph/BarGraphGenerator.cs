@@ -282,6 +282,69 @@ namespace BarGraph.VittorCloud
 
         void InitializeGraph()
         {
+            if(Graph != null)
+            {
+                Debug.Log("Graph");
+                foreach ( var g in Graph.ListOfGroups)
+                {
+                    if (g != null)
+                    {
+                        if (g.ListOfBar != null)
+                        {
+                            foreach ( var gl in g.ListOfBar)
+                            {
+                                if (gl != null)
+                                {
+                                    DestroyImmediate(gl);
+                                }
+                            }
+                            g.ListOfBar.Clear();
+                        }
+                        DestroyImmediate(g);
+                    }
+                }
+
+                Graph.ListOfGroups.Clear();
+
+                foreach ( var p in Graph.ListOfXPoint)
+                {
+                    if (p != null)
+                    {
+                        DestroyImmediate(p.gameObj);
+                        DestroyImmediate(p);
+                    }
+                }
+
+                foreach (var p in Graph.ListOfYPoints)
+                {
+                    if (p != null)
+                    {
+                        DestroyImmediate(p.gameObj);
+                        DestroyImmediate(p);
+                    }
+                }
+
+                foreach (var p in Graph.ListOfZPoints)
+                {
+                    if (p != null)
+                    {
+                        DestroyImmediate(p.gameObj);
+                        DestroyImmediate(p);
+                    }
+                }
+
+                DestroyImmediate(Graph.XAxis);
+                DestroyImmediate(Graph.YAxis);
+                DestroyImmediate(Graph.ZAxis);
+                DestroyImmediate(Graph.XPoint);
+                DestroyImmediate(Graph.YPoint);
+                DestroyImmediate(Graph.ZPoint);
+                DestroyImmediate(Graph.XYPlane);
+                DestroyImmediate(Graph.XZPlane);
+                DestroyImmediate(Graph.YZPlane);
+                DestroyImmediate(Graph);
+            }
+
             Graph = Instantiate(GraphRef, transform.position, Quaternion.identity);
             Graph.transform.rotation = this.transform.rotation;
             Graph.transform.parent = this.transform;

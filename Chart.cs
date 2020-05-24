@@ -10,11 +10,12 @@ public class Chart : MonoBehaviour
     float _scaleStep = 0.001f;
     float _maxScale = 0.15f;
     int _rotateSpeed = 15;
+    BarGraphDat _barGraphDat;
     
     // Start is called before the first frame update
     void Start()
     {
-      
+        _barGraphDat = GetComponentInChildren<BarGraphDat>();
     }
 
     // Update is called once per frame
@@ -86,5 +87,10 @@ public class Chart : MonoBehaviour
     public void stopScaleDown()
     {
         _isScaleDown = false;
+    }
+
+    public void setChartYear(int year)
+    {
+        _barGraphDat.updateBarYear(year);
     }
 }

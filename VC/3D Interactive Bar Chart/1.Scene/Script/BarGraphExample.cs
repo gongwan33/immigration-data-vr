@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq.Expressions;
 using BarGraph.VittorCloud;
+using System.Linq;
 
 public class BarGraphExample : MonoBehaviour
 {

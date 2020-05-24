@@ -12,6 +12,7 @@ namespace Graph.VittorCloud
         #region publicVariable
         public TextMeshPro label;
         public Transform labelContainer;
+        public GameObject gameObj;
 
         public string labelText
         {
