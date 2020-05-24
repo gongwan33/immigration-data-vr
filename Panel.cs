@@ -7,6 +7,7 @@ public class Panel : MonoBehaviour
     GameObject _gobjBtnPlus, _gobjBtnMinus, _gobjBtnAspects, _gobjBtnRotate;
     GameObject _gobjChart;
     Chart _chart;
+    AudioSource _btnSound;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,8 @@ public class Panel : MonoBehaviour
         _gobjBtnMinus = GameObject.Find("Button Minus");
         _gobjBtnRotate = GameObject.Find("Button Rotate");
         _gobjBtnAspects = GameObject.Find("Button Aspect");
+
+        _btnSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,6 +34,8 @@ public class Panel : MonoBehaviour
         Vector3 scale = obj.transform.localScale;
         scale.y = 0.01f;
         obj.transform.localScale = scale;
+
+        _btnSound.Play();
     }
 
     void buttonUp(GameObject obj)
