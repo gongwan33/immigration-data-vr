@@ -336,9 +336,7 @@ namespace BarGraph.VittorCloud
                 DestroyImmediate(Graph.XAxis);
                 DestroyImmediate(Graph.YAxis);
                 DestroyImmediate(Graph.ZAxis);
-                DestroyImmediate(Graph.XPoint);
-                DestroyImmediate(Graph.YPoint);
-                DestroyImmediate(Graph.ZPoint);
+
                 DestroyImmediate(Graph.XYPlane);
                 DestroyImmediate(Graph.XZPlane);
                 DestroyImmediate(Graph.YZPlane);

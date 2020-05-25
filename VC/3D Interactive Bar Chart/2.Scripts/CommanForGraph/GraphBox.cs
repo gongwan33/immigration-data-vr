@@ -160,6 +160,7 @@ namespace Graph.VittorCloud
                     XPoint = p.GetComponent<GraphPoint>();
                     XPoint.gameObj = p;
                 }
+
                 GraphPoint temp = Instantiate(XPoint, transform.position, transform.rotation);
 
 

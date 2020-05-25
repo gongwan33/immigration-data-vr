@@ -4,13 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BarGraph.VittorCloud;
+using UnityEngine;
+using System.Text.RegularExpressions;
 
 class ImmigrationDataParser
 {
     List<MigrationData> parsedData = new List<MigrationData>();
-    public ImmigrationDataParser()
+
+    private string[] parseTextAsset(TextAsset ft)
     {
-        string[] lines = System.IO.File.ReadAllLines(@"Assets/Parser/Data.csv");
+        string fs = ft.text;
+        string[] fLines = Regex.Split(fs, "\n|\r|\r\n");
+
+        return fLines;
+    }
+
+    public ImmigrationDataParser(TextAsset dat)
+    {
+        string[] lines = parseTextAsset(dat);
 
         var lineCount = 0;
 

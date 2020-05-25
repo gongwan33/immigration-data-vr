@@ -6,7 +6,7 @@ using BarGraph.VittorCloud;
 public class BarGraphDat : MonoBehaviour
 {
     BarGraphGenerator _barGraphGenerator;
-    ImmigrationDataParser _parser = new ImmigrationDataParser();
+    ImmigrationDataParser _parser;
 
     public List<List<BarGraphDataSet>> appDataSet = new List<List<BarGraphDataSet>>();
     int[] _yearList = new int[] { 2018, 2019, 2020 };
@@ -14,6 +14,9 @@ public class BarGraphDat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TextAsset raw = Resources.Load(@"Data") as TextAsset;
+        _parser = new ImmigrationDataParser(raw);
+
         _barGraphGenerator = GetComponent<BarGraphGenerator>();
 
         foreach(int year in _yearList)
